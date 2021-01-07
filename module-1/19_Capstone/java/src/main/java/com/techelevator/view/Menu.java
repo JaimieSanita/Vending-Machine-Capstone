@@ -4,26 +4,31 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.io.File;
 
 public class Menu {
 
+	//VARIABLES
 	private PrintWriter out;
 	private Scanner in;
 
+	//CONSTRUCTOR
 	public Menu(InputStream input, OutputStream output) {
-		this.out = new PrintWriter(output);
-		this.in = new Scanner(input);
+		this.out = new PrintWriter(output); //instantiating PrintWriter
+		this.in = new Scanner(input);		//instantiating Scanner
 	}
 
+	//METHODS
+		//METHOD for showing choice through display options
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
-			displayMenuOptions(options);
-			choice = getChoiceFromUserInput(options);
+			displayMenuOptions(options); //displays menu options to user
+			choice = getChoiceFromUserInput(options); //allows user to select a choice from displayed menu
 		}
-		return choice;
+		return choice; //choice is set to userInput of choice
 	}
-
+		//METHOD for getting user input for choice
 	private Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
 		String userInput = in.nextLine();
@@ -50,4 +55,6 @@ public class Menu {
 		out.print("\nPlease choose an option >>> ");
 		out.flush();
 	}
+	
+
 }
