@@ -1,12 +1,17 @@
 package com.techelevator.inventory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inventory {
 	
+	List<Item> freshInventoryList = new ArrayList();
 	//consider setting quantity constant to 5
 	
 	//inventory needs purchasePrice, itemName, slotNumber
 	
-	public boolean isItemSoldOut() {
+	public boolean isItemSoldOut(String slotId) {
+		//loop through list to see if contains && quantity is not 0
 		return true;
 	}
 	
@@ -25,4 +30,7 @@ public class Inventory {
 	
 	
 
+	public Inventory(List<Item> items) {
+		this.freshInventoryList = items;
+	}
 }

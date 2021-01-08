@@ -49,7 +49,7 @@ private File inputFile;
 		}
 	}
 	
-	public List<Item> loadInventory(){
+	public Inventory loadInventory(){
 		
 		List<Item> inventoryList = new ArrayList();
 		
@@ -69,7 +69,7 @@ private File inputFile;
 			return null;
 			
 		}
-		return inventoryList;
+		return new Inventory(inventoryList);
 	}
 
 

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import com.techelevator.inventory.*;
 import com.techelevator.*;
+import com.techelevator.view.*;
 
 
 import java.io.File;
@@ -52,7 +53,7 @@ public class Menu {
 		}
 		return choice;
 	}
-
+	//MAIN MENU
 	private void displayMenuOptions(Object[] options) {
 		out.println();
 		for (int i = 0; i < options.length; i++) {

@@ -10,159 +10,174 @@ import java.util.Scanner;
 
 import com.techelevator.inventory.*;
 
-
-
 public class VendingMachineCLI {
 
-	//CONSTANT VARIABLES
+	// CONSTANT VARIABLES
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
-	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
-	
+	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE,
+			MAIN_MENU_OPTION_EXIT };
+
 	private static final String PURCHASE_MENU_OPTION_FEED_MONEY = "Feed Money";
 	private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Select Product";
 	private static final String PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS = "Finish Transactions";
 	private static String currentMoney = " \nCurrent Money Provided: $";
-	private static final String[] PURCHASE_MENU_OPTIONS = {PURCHASE_MENU_OPTION_FEED_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT,  PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS};
-	
+	private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_FEED_MONEY,
+			PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS };
+
 	private MoneyManagement balance = new MoneyManagement();
 	
-	//VARIABLES
+
+	// VARIABLES
 	private Menu menu;
 	private Menu purchaseMenu;
 	private Scanner userInput = new Scanner(System.in);
-	
+
 	File inventoryFile = new File("vendingmachine.csv");
 	// call a module that loads the pokedex
 	CsvLoader loader = new CsvLoader(inventoryFile);
-	List<Item> freshInventoryList = loader.loadInventory();
+	Inventory inventory = loader.loadInventory();
 
-	//CONSTRUCTOR
+	// CONSTRUCTOR
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
 
-	//HELPER METHOD
-	
-	public int feedMoney() {
-		
-		int amountToFeed = 0;
-		
+	// HELPER METHOD
+
+	public Item selectProduct() {
+
+		Item result = null;
+		String productSelection = null;
 		do {
-		System.out.println("Enter amount in whole dollars: $");
-		try {
-			amountToFeed = Integer.valueOf(userInput.nextLine());
-			if(amountToFeed <=0) {
-				System.out.println("Must enter a positive number");
+			System.out.println("Please a select a product >>>");
+			try {
+				productSelection = userInput.nextLine();
+				
+				//inventory.getItem (loop will already be here off-screen)
+				//if/else
+				
+				if (!freshInventoryList.contains(productSelection)) {
+					System.out.println("That product does not exist. Please try again.");
+					// loop to purchase menu
+
+				}
+				for (int i = 0; i < freshInventoryList.size(); i++) {
+					if (freshInventoryList.get(i).equals(productSelection)
+							&& freshInventoryList.get(i).getQuantity() == 0) {
+						System.out.println("This product is sold out. Please try again.");
+					}
+
+				}
+			} catch (NumberFormatException nfe) {
+				System.out.println("Please do something else.");
 			}
-		} 
-		catch(NumberFormatException nfe) {
-			System.out.println("Please enter a valid whole number");
-		}
-		} while(amountToFeed <= 0);
-		
-		return amountToFeed;
-		
+		} while (result == null);
+		return result;
 	}
-	
-	//create a loop for purchase menu	
+
+
+	public int feedMoney() {
+
+		int amountToFeed = 0;
+
+		do {
+			System.out.println("Enter amount in whole dollars: $");
+			try {
+				amountToFeed = Integer.valueOf(userInput.nextLine());
+				if (amountToFeed <= 0) {
+					System.out.println("Must enter a positive number");
+				}
+			} catch (NumberFormatException nfe) {
+				System.out.println("Please enter a valid whole number");
+			}
+		} while (amountToFeed <= 0);
+
+		return amountToFeed;
+
+	}
+
+	// create a loop for purchase menu
 	public void run() {
 
 		while (true) {
-			
+
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-			
-			
+
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				
+
 				System.out.println("\n");
-				for(Item availableItem : freshInventoryList) {
+				for (Item availableItem : freshInventoryList) {
 					System.out.println(availableItem + "\n");
-					
-				}
-				
-				// display vending machine items
-				
-				//create file
-				
-				//open file
-				
-				//read file
-				
-				//split each line into separate strings
-					//String slotNumber
-					//String itemName
-					//Double purchasePrice
-					//String itemCategory
-				
-				//if/else: product sold out
-				
-				
-				//return item name & quantity(quantity will not be derived from file)
-				
+
+				}//put in displayInventory() & call off inventory
+
+	
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				System.out.println("Current Money Provided: " + balance.getFormattedBalance());
-				String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
-				if(purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)){
-					
-					int amountFed = feedMoney();
-					balance.addDollarsToBalance(amountFed);
-				
-				
-					
-				} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)){
-					//selectProduct();
-					System.out.println("Select Product.");
-				} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS)){
-					//finishTransaction();
-					System.out.println("Finish Transaction.");
-					
+				while (true) {
+					System.out.println("Current Money Provided: " + balance.getFormattedBalance());
+					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+
+					if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+
+						int amountFed = feedMoney();
+						balance.addDollarsToBalance(amountFed);
+
+					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+						System.out.println("\n");
+						for (Item availableItem : freshInventoryList) {
+							System.out.println(availableItem + "\n");
+
+						}
+						String providedSlot = selectProduct();
+						
+
+					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS)) {
+						// finishTransaction();
+						System.out.println("Finish Transaction.");
+
+					}
 				}
 				// do purchase
-				
-				//create sub purchase menu // main menu created via Andrew
-				
-				//feed money() within Money class; purpose to confirm whole #'s & update balance
-					//related to current money provided variable
-				
-				//select products DOOZY
-					//create new list from file OR use variables from above
-				
-					//display the items
-						//String slotNumber
-						//String itemName
-						//Double purchasePrice
-				
-					//userSelection
-				
-					//if/else(String userSelection)
-						//not exist, print message & loop to main menu
-						//sold out, print message & loop to main menu
-						
-						//dispense 
-							//create dispense method to pass through here(put in inventory)
-				
-				//finish transaction
-				
-				//current money provided
+
+				// create sub purchase menu // main menu created via Andrew
+
+				// feed money() within Money class; purpose to confirm whole #'s & update
+				// balance
+				// related to current money provided variable
+
+				// select products DOOZY
+				// create new list from file OR use variables from above
+
+				// display the items
+				// String slotNumber
+				// String itemName
+				// Double purchasePrice
+
+				// userSelection
+
+				// if/else(String userSelection)
+				// not exist, print message & loop to main menu
+				// sold out, print message & loop to main menu
+
+				// dispense
+				// create dispense method to pass through here(put in inventory)
+
+				// finish transaction
+
+				// current money provided
 			}
 		}
 	}
-	
-	
-	
-	//ENTRY POINT MAIN
+
+	// ENTRY POINT MAIN
 	public static void main(String[] args) {
-		
-		
-		
+
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		cli.run();
-		
-		
+
 	}
-	
-	
+
 }
