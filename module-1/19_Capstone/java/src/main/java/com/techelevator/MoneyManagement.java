@@ -23,12 +23,12 @@ public class MoneyManagement {
 	public String getChange() {
 		
 		return null;
-		//return quarters nickels
+		//return quarters nickels & dimes
 	}
 	
 	public String getFormattedBalance() {
-		//return the balance as dollars and cents
-		return null;
+		
+		return "$" + currentBalance/100;
 	}
 	
 	public int getCurrentInCents() {

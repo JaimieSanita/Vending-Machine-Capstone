@@ -27,7 +27,6 @@ public class VendingMachineCLI {
 			PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS };
 
 	private MoneyManagement balance = new MoneyManagement();
-	
 
 	// VARIABLES
 	private Menu menu;
@@ -49,34 +48,38 @@ public class VendingMachineCLI {
 	public Item selectProduct() {
 
 		Item result = null;
-		String productSelection = null;
+		String productSelection = null; //slotId
 		do {
 			System.out.println("Please a select a product >>>");
 			try {
 				productSelection = userInput.nextLine();
+				Item i = inventory.getItemBySlot(productSelection);
+				//inventory.getItemByName does not exist
 				
-				//inventory.getItem (loop will already be here off-screen)
-				//if/else
+				if(inventory.isItemSoldOut(productSelection)) {
+					System.out.println("This item is sold out. Please select another item.");
+				}
 				
-				if (!freshInventoryList.contains(productSelection)) {
-					System.out.println("That product does not exist. Please try again.");
-					// loop to purchase menu
-
-				}
-				for (int i = 0; i < freshInventoryList.size(); i++) {
-					if (freshInventoryList.get(i).equals(productSelection)
-							&& freshInventoryList.get(i).getQuantity() == 0) {
-						System.out.println("This product is sold out. Please try again.");
-					}
-
-				}
-			} catch (NumberFormatException nfe) {
-				System.out.println("Please do something else.");
 			}
-		} while (result == null);
-		return result;
-	}
-
+				//inventory.getItem 
+				//if/else	
+			//	if (!freshInventoryList.contains(productSelection)) {
+				//	System.out.println("That product does not exist. Please try again.");
+					// loop to purchase menu
+			//	}
+			//	for (int i = 0; i < freshInventoryList.size(); i++) {
+			//		if (freshInventoryList.get(i).equals(productSelection)
+			//				&& freshInventoryList.get(i).getQuantity() == 0) {
+			//			System.out.println("This product is sold out. Please try again.");
+			//		}
+//
+			//	}
+		//	} catch (NumberFormatException nfe) {
+		//		System.out.println("Please do something else.");
+		//	}
+	//	} while (result == null);
+	//	return result;
+//	}
 
 	public int feedMoney() {
 
@@ -106,14 +109,8 @@ public class VendingMachineCLI {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
+				inventory.displayInventory();
 
-				System.out.println("\n");
-				for (Item availableItem : freshInventoryList) {
-					System.out.println(availableItem + "\n");
-
-				}//put in displayInventory() & call off inventory
-
-	
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				while (true) {
 					System.out.println("Current Money Provided: " + balance.getFormattedBalance());
@@ -125,13 +122,9 @@ public class VendingMachineCLI {
 						balance.addDollarsToBalance(amountFed);
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-						System.out.println("\n");
-						for (Item availableItem : freshInventoryList) {
-							System.out.println(availableItem + "\n");
-
-						}
-						String providedSlot = selectProduct();
-						
+						inventory.displayInventory();
+						//Item selection = selectProduct();
+						//inventory.getItemBySlot(selection);
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS)) {
 						// finishTransaction();
@@ -139,34 +132,6 @@ public class VendingMachineCLI {
 
 					}
 				}
-				// do purchase
-
-				// create sub purchase menu // main menu created via Andrew
-
-				// feed money() within Money class; purpose to confirm whole #'s & update
-				// balance
-				// related to current money provided variable
-
-				// select products DOOZY
-				// create new list from file OR use variables from above
-
-				// display the items
-				// String slotNumber
-				// String itemName
-				// Double purchasePrice
-
-				// userSelection
-
-				// if/else(String userSelection)
-				// not exist, print message & loop to main menu
-				// sold out, print message & loop to main menu
-
-				// dispense
-				// create dispense method to pass through here(put in inventory)
-
-				// finish transaction
-
-				// current money provided
 			}
 		}
 	}
