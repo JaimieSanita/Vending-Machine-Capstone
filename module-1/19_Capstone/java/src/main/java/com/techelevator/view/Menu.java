@@ -3,7 +3,14 @@ package com.techelevator.view;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import com.techelevator.inventory.*;
+import com.techelevator.*;
+
+
 import java.io.File;
 
 public class Menu {
@@ -49,12 +56,27 @@ public class Menu {
 	private void displayMenuOptions(Object[] options) {
 		out.println();
 		for (int i = 0; i < options.length; i++) {
+			
+			
 			int optionNum = i + 1;
 			out.println(optionNum + ") " + options[i]);
+			
 		}
+		
+		
 		out.print("\nPlease choose an option >>> ");
 		out.flush();
 	}
 	
 
-}
+
+
+	private void displayVendingMachineItems() {
+		
+		
+	}
+		
+
+		
+		
+	}
