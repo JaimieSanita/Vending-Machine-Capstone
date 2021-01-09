@@ -22,10 +22,10 @@ public class Logger {
 		int newBalanceInCents = currentBalance + amountFed;
 		
 		//Converts cents to Dollars
-		BigDecimal newBalanceInDollars = BigDecimal.valueOf(newBalanceInCents).movePointLeft(2);
-		BigDecimal amountFedInDollars = BigDecimal.valueOf(amountFed).movePointLeft(2);
+		BigDecimal newBalanceInDollars = BigDecimal.valueOf(newBalanceInCents);
+		BigDecimal amountFedInDollars = BigDecimal.valueOf(amountFed);
 		
-		String logPrint = "FEED MONEY: " + amountFedInDollars + newBalanceInDollars;
+		String logPrint = "FEED MONEY: $" + amountFedInDollars.setScale(2) + " $" + newBalanceInDollars.setScale(2);
 		
 		printToLogFile(logPrint);
 	}
@@ -46,8 +46,11 @@ public class Logger {
 	}
 	
 	public void logChange(int currentBalance) {
+		int currentBalanceDollars = currentBalance/100;
+		BigDecimal currentBalanceBD = BigDecimal.valueOf(currentBalanceDollars);
 		
-		String logPrint = "GIVE CHANGE: " + "$" + currentBalance + " " + "$" + BigDecimal.ZERO;
+		
+		String logPrint = "GIVE CHANGE: " + "$" + currentBalanceBD.setScale(2) + " " + "$" + BigDecimal.ZERO.setScale(2);
 		
 		printToLogFile(logPrint);
 	}
