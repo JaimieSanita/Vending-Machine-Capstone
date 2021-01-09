@@ -45,9 +45,9 @@ public class Inventory {
 				result = i;
 				
 				//Log Purchase
-				Logger logger = new Logger();
-				MoneyManagement balance = new MoneyManagement();
-				logger.logPurchase(i, balance.getCurrentBalanceInCents());
+				//Logger logger = new Logger();
+				//MoneyManagement balance = new MoneyManagement();
+				//logger.logPurchase(i, balance.convertCentsToDollars(balance.getCurrentBalanceInCents()));
 			}
 		} catch (NullPointerException nfe) {
 			System.out.println("Please enter valid item.");

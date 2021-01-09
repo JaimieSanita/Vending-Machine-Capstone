@@ -4,14 +4,16 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 import com.techelevator.inventory.*;
 
+import com.techelevator.*;
+
 public class MoneyManagement {
 
-	private int currentBalanceInCents = 0;
+	private int currentBalanceInCents;
 	private int amountToFeed;
 
 	public void addDollarsToBalance(int dollars) {
 
-		currentBalanceInCents += dollars * 100; // current balance in cents
+		currentBalanceInCents += (dollars * 100); // current balance in cents
 	}
 
 	public String getFormattedBalanceInDollars() {
@@ -24,14 +26,24 @@ public class MoneyManagement {
 	public int getCurrentBalanceInCents() {
 		return currentBalanceInCents;
 	}
+	
+	public BigDecimal convertCentsToDollars(int amountInCents) {
+		
+		BigDecimal amountInDollars = BigDecimal.valueOf(amountInCents).movePointLeft(2);
+		return amountInDollars;
+	}
 
 	public int getRemainingBalaceInCents(Item product) {
 		
 		//converts price into cents
 		int price = product.getPrice().movePointRight(2).intValueExact();
-		
 		currentBalanceInCents -= price;
+		
+		Logger logger = new Logger();
+		logger.logPurchase(product, convertCentsToDollars(currentBalanceInCents));
+
 		return currentBalanceInCents;
+		
 
 	}
 	
@@ -54,7 +66,7 @@ public class MoneyManagement {
 		} while (amountToFeedInDollars <= 0);
 		
 		Logger logger = new Logger();
-		logger.logFeed(currentBalanceInCents, amountToFeedInDollars);
+		logger.logFeed(convertCentsToDollars(getCurrentBalanceInCents()), BigDecimal.valueOf(amountToFeedInDollars));
 
 		return amountToFeedInDollars;
 
@@ -63,7 +75,7 @@ public class MoneyManagement {
 	public void getChange() {
 		
 		Logger logger = new Logger();
-		logger.logChange(getCurrentBalanceInCents());
+		logger.logChange(convertCentsToDollars(getCurrentBalanceInCents()));
 		
 		int[] change = {currentBalanceInCents/25, (currentBalanceInCents%=25)/10, (currentBalanceInCents%=10)/5};
 		System.out.println("\nChange: Quarters: " + change[0] + ". Dimes: " + change[1] + ". Nickels: " + change[2]);
