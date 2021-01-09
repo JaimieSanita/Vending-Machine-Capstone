@@ -19,7 +19,8 @@ public class MoneyManagement {
 	public String getFormattedBalanceInDollars() {
 		
 		//converts cents into dollars
-		BigDecimal formattedBalanceInDollars = BigDecimal.valueOf(currentBalanceInCents).movePointLeft(2);
+		BigDecimal formattedBalanceInDollars = convertCentsToDollars(currentBalanceInCents);
+		
 		return "$" + formattedBalanceInDollars;
 	}
 

@@ -85,6 +85,11 @@ public class VendingMachineCLI {
 					}
 				}
 			}
+			
+			else if(choice.equals(MAIN_MENU_OPTION_EXIT)) {
+				System.out.println("Thank you for shopping with us!. Come again soon.");
+				System.exit(0);
+			}
 		}
 	}
 

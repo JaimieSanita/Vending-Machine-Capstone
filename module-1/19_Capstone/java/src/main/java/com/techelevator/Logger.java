@@ -44,17 +44,12 @@ public class Logger {
 
 	private void printToLogFile(String logPrint) { // throws IOException {
 
-		// Prepare line of output
+	
 
 		StringBuilder logEntry = new StringBuilder();
 		logEntry.append(
 				String.format("%-24s", new SimpleDateFormat("MM/dd/YYYY hh:mm:ss a").format(new java.util.Date())));
 		logEntry.append(String.format("%-30s", logPrint));
-
-		// logEntry.append(String.format("%1$8s","$"+start.toString()));
-		// logEntry.append(String.format("%1$8s","$"+finish.toString()));
-
-		// Define log file
 
 		File logger = new File("Log.txt");
 
@@ -74,7 +69,7 @@ public class Logger {
 
 		try (FileOutputStream f = new FileOutputStream(logger, true); PrintWriter pw = new PrintWriter(f)) {
 
-			// make the log entry
+			
 
 			pw.println(logEntry);
 			pw.flush();
@@ -85,8 +80,5 @@ public class Logger {
 
 	}
 
-	// ITEM NAME SLOT ID CURRENT BALANCE ENDING BALANCE
 
-	// method for dispensing change
-	// GIVE CHANGE: CURRENT BALANCE $O
 }
