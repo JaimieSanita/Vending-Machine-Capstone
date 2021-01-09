@@ -53,6 +53,7 @@ public class VendingMachineCLI {
 				inventory.displayInventory();
 
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
+				
 				while (true) {
 					System.out.println("Available Balance: " + balance.getFormattedBalanceInDollars());
 					String purchaseChoice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
@@ -66,8 +67,13 @@ public class VendingMachineCLI {
 
 						inventory.displayInventory();
 						Item productSelection = inventory.selectProduct(userInput);
+						
+						//If we get an Item from the method on line 69, the code below executes, if not it loops back to purchase menu
+						while(productSelection != null) {
 						inventory.dispenseItem(productSelection);
 						balance.getRemainingBalaceInCents(productSelection);
+						break; 
+						}
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS)) {
 						

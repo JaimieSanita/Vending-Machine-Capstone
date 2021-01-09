@@ -13,37 +13,37 @@ public class Inventory {
 		this.freshInventoryList = items;
 	}
 
-	
 	// I simplified the sold out code
 	public boolean isItemSoldOut(Item product) {
 		return product.getQuantity() < 1;
 
 	}
 
-	//I moved selectProduct() from the main application to clean up that page a little bit
+	// I moved selectProduct() from the main application to clean up that page a
+	// little bit
 	public Item selectProduct(Scanner input) {
 
 		Item result = null;
 		String productSelection = null; // slotId
-		do {
-			System.out.println("Please select item by entering slot ID>>>");
-			try {
-				productSelection = input.nextLine();
-				Item i = getItemBySlot(productSelection);
 
-				if (i == null) {
-					System.out.println("This item does not exist.");
+		System.out.println("Please select item by entering slot ID>>>");
+		try {
+			productSelection = input.nextLine();
+			Item i = getItemBySlot(productSelection);
 
-				} else if (isItemSoldOut(i)) {
-					System.out.println("This item is sold out. Please select another item.");
+			if (i == null) {
+				System.out.println("This item does not exist.");
 
-				} else {
-					result = i;
-				}
-			} catch (NumberFormatException nfe) {
-				System.out.println("Please enter valid WHAT.");
+			} else if (isItemSoldOut(i)) {
+				System.out.println(i.getItemName() + " is sold out\n");
+
+			} else {
+				result = i;
 			}
-		} while (result == null);
+		} catch (NullPointerException nfe) {
+			System.out.println("Please enter valid WHAT.");
+		}
+
 		return result;
 	}
 
@@ -69,7 +69,7 @@ public class Inventory {
 		return null; // how return as an Item because slotID is a string
 	}
 
-	//displays up-to-date inventory list
+	// displays up-to-date inventory list
 	public void displayInventory() {
 		System.out.println("\n");
 		for (Item availableItem : freshInventoryList) {
