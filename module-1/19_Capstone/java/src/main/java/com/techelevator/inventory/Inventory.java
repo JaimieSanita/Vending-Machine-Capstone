@@ -1,28 +1,62 @@
 package com.techelevator.inventory;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Inventory {
 
 	List<Item> freshInventoryList = new ArrayList();
-	// consider setting quantity constant to 5
 
-	// inventory needs purchasePrice, itemName, slotNumber
+	public Inventory(List<Item> items) {
+		this.freshInventoryList = items;
+	}
 
-	public boolean isItemSoldOut(String slotId) {
-		
-		for (Item item: this.freshInventoryList) {
-			if(item.getSlotId().equalsIgnoreCase(slotId)) {
-				if(item.getQuantity() == 0) {
-					return true;
+	
+	// I simplified the sold out code
+	public boolean isItemSoldOut(Item product) {
+		return product.getQuantity() < 1;
+
+	}
+
+	//I moved selectProduct() from the main application to clean up that page a little bit
+	public Item selectProduct(Scanner input) {
+
+		Item result = null;
+		String productSelection = null; // slotId
+		do {
+			System.out.println("Please select item by entering slot ID>>>");
+			try {
+				productSelection = input.nextLine();
+				Item i = getItemBySlot(productSelection);
+
+				if (i == null) {
+					System.out.println("This item does not exist.");
+
+				} else if (isItemSoldOut(i)) {
+					System.out.println("This item is sold out. Please select another item.");
+
 				} else {
-					return false;
+					result = i;
 				}
+			} catch (NumberFormatException nfe) {
+				System.out.println("Please enter valid WHAT.");
 			}
-		}
-		
-		return true;
+		} while (result == null);
+		return result;
+	}
+
+	public void dispenseItem(Item product) {
+
+		// Removes 1 item from inventory
+		int newQuantity = product.getQuantity() - 1;
+		product.setQuantity(newQuantity);
+
+		// Displays Dispense Message
+		System.out.println(
+				"\nDispensing: " + product.getItemName() + ", $" + product.getPrice() + "\n" + product.sound() + "\n");
+
 	}
 
 	public Item getItemBySlot(String slotId) {
@@ -35,17 +69,7 @@ public class Inventory {
 		return null; // how return as an Item because slotID is a string
 	}
 
-	public int getItemQuantity() {
-		
-		
-		// consider math
-		return 0;
-	}
-
-	public int getRemainingQuantity() {
-		return 0;
-	}
-
+	//displays up-to-date inventory list
 	public void displayInventory() {
 		System.out.println("\n");
 		for (Item availableItem : freshInventoryList) {
@@ -53,7 +77,4 @@ public class Inventory {
 		}
 	}
 
-	public Inventory(List<Item> items) {
-		this.freshInventoryList = items;
-	}
 }
