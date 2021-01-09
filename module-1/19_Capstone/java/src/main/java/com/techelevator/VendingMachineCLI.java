@@ -78,7 +78,9 @@ public class VendingMachineCLI {
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS)) {
 						
 						// finishTransaction();
-						System.out.println("Finish Transaction.");
+						balance.getChange();
+						break;
+
 
 					}
 				}

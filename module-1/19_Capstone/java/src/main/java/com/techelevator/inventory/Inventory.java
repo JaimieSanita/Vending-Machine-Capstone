@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.techelevator.Logger;
+import com.techelevator.MoneyManagement;
+
 public class Inventory {
 
 	List<Item> freshInventoryList = new ArrayList();
@@ -14,13 +17,14 @@ public class Inventory {
 	}
 
 	// I simplified the sold out code
-	public boolean isItemSoldOut(Item product) {
+	private boolean isItemSoldOut(Item product) {
 		return product.getQuantity() < 1;
 
 	}
 
 	// I moved selectProduct() from the main application to clean up that page a
 	// little bit
+	
 	public Item selectProduct(Scanner input) {
 
 		Item result = null;
@@ -39,13 +43,19 @@ public class Inventory {
 
 			} else {
 				result = i;
+				
+				//Log Purchase
+				Logger logger = new Logger();
+				MoneyManagement balance = new MoneyManagement();
+				logger.logPurchase(i, balance.getCurrentBalanceInCents());
 			}
 		} catch (NullPointerException nfe) {
-			System.out.println("Please enter valid WHAT.");
+			System.out.println("Please enter valid item.");
 		}
 
 		return result;
 	}
+	
 
 	public void dispenseItem(Item product) {
 
