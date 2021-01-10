@@ -4,13 +4,12 @@ import java.math.BigDecimal;
 
 public class Beverages extends Item {
 
-	public Beverages(String type, String slotID, BigDecimal price, String itemName) {
-		super(type, slotID, price, itemName);
-		this.type = type;
+	public Beverages(String slotID, String itemName, BigDecimal price, String type) {
+		super(slotID, itemName,  price, type);
 		this.slotID = slotID;
-		this.price = price;
 		this.itemName = itemName;
-		
+		this.price = price;
+		this.type = type;
 	}
 
 	@Override
