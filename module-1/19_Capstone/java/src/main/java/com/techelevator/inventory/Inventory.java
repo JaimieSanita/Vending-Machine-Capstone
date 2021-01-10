@@ -24,7 +24,7 @@ public class Inventory {
 
 	// I moved selectProduct() from the main application to clean up that page a
 	// little bit
-	
+
 	public Item selectProduct(Scanner input) {
 
 		Item result = null;
@@ -43,11 +43,12 @@ public class Inventory {
 
 			} else {
 				result = i;
-				
-				//Log Purchase
-				//Logger logger = new Logger();
-				//MoneyManagement balance = new MoneyManagement();
-				//logger.logPurchase(i, balance.convertCentsToDollars(balance.getCurrentBalanceInCents()));
+
+				// Log Purchase
+				// Logger logger = new Logger();
+				// MoneyManagement balance = new MoneyManagement();
+				// logger.logPurchase(i,
+				// balance.convertCentsToDollars(balance.getCurrentBalanceInCents()));
 			}
 		} catch (NullPointerException nfe) {
 			System.out.println("Please enter valid item.");
@@ -55,7 +56,6 @@ public class Inventory {
 
 		return result;
 	}
-	
 
 	public void dispenseItem(Item product) {
 
@@ -82,9 +82,10 @@ public class Inventory {
 	// displays up-to-date inventory list
 	public void displayInventory() {
 		System.out.println("\n");
+
 		for (Item availableItem : freshInventoryList) {
 			System.out.println(availableItem + "\n");
+
 		}
 	}
-
 }

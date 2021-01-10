@@ -34,10 +34,10 @@ private File inputFile;
 		BigDecimal price = new BigDecimal(itemComponents[2].trim());
 		String type = itemComponents[3].trim();
 		
-		if(type.toLowerCase().equals("beverages")) {
+		if(type.toLowerCase().equals("drink")) {
 			return new Beverages(slotId, itemName, price, type);
 			
-		} else if(type.toLowerCase().equals("chips")) {
+		} else if(type.toLowerCase().equals("chip")) {
 			return new Chips(slotId, itemName, price, type);
 		} else if (type.toLowerCase().equals("candy")){
 			return new Candy(slotId, itemName, price, type);
