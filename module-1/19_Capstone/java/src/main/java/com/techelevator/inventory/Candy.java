@@ -6,7 +6,10 @@ public class Candy extends Item {
 
 	public Candy(String type, String slotID, BigDecimal price, String itemName) {
 		super(type, slotID, price, itemName);
-		// TODO Auto-generated constructor stub
+		this.type = type;
+		this.slotID = slotID;
+		this.price = price;
+		this.itemName = itemName;
 	}
 	
 	@Override

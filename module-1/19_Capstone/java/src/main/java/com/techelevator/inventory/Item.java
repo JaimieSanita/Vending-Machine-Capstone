@@ -7,11 +7,11 @@ public abstract class Item {
 	// VARIABLES (these variables will be different than the variables derived from
 	// file)
 
-	private String type;
-	private String slotID;
-	private BigDecimal price;
-	private String itemName;
-	private int quantity;
+	protected String type;
+	protected String slotID;
+	protected BigDecimal price;
+	protected String itemName;
+	protected int quantity;
 
 	private static final int DEFAULT_QUANTITY = 5;
 
