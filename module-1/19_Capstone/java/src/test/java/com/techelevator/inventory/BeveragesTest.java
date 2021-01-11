@@ -33,7 +33,7 @@ public class BeveragesTest {
 		
 		String expectedId = "c3";
 		
-		Beverages beverage = new Beverages("", expectedId , null, "");
+		Beverages beverage = new Beverages(expectedId,""  , null, "");
 		
 		
 		
@@ -48,7 +48,7 @@ public class BeveragesTest {
 	public void beverage_get_name_works() {
 		String expectedName = "cola";
 		
-		Beverages beverage = new Beverages("", "", null, expectedName);
+		Beverages beverage = new Beverages("", expectedName, null, "");
 		
 		String actualName = beverage.getItemName();
 		
@@ -57,10 +57,11 @@ public class BeveragesTest {
 				actualName);
 	}
 	
-	@Test void beverage_get_type_works() {
+	@Test 
+	public void beverage_get_type_works() {
 		String expectedType = "Beverages";
 		
-		Beverages beverage = new Beverages(expectedType, "", null, "");
+		Beverages beverage = new Beverages("", "", null, expectedType);
 		
 		String actualType = beverage.getType();
 		
@@ -69,7 +70,8 @@ public class BeveragesTest {
 				actualType);
 	}
 	
-	@Test void beverage_get_price_works() {
+	@Test 
+	public void beverage_get_price_works() {
 		
 		BigDecimal expectedPrice = BigDecimal.ONE;
 		

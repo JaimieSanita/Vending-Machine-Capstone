@@ -32,7 +32,7 @@ public class ChipsTest {
 		
 		String expectedId = "c3";
 		
-		Chips chip = new Chips("", expectedId , null, "");
+		Chips chip = new Chips(expectedId, "", null, "");
 		
 		
 		
@@ -47,7 +47,7 @@ public class ChipsTest {
 	public void chip_get_name_works() {
 		String expectedName = "cola";
 		
-		Chips chip = new Chips("", "", null, expectedName);
+		Chips chip = new Chips("", expectedName, null,"");
 		
 		String actualName = chip.getItemName();
 		
@@ -60,7 +60,7 @@ public class ChipsTest {
 	public void chip_get_type_works() {
 		String expectedType = "Chips";
 		
-		Chips chip = new Chips(expectedType, "", null, "");
+		Chips chip = new Chips("", "", null,expectedType );
 		
 		String actualType = chip.getType();
 		

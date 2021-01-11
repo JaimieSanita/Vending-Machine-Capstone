@@ -43,12 +43,6 @@ public class Inventory {
 
 			} else {
 				result = i;
-
-				// Log Purchase
-				// Logger logger = new Logger();
-				// MoneyManagement balance = new MoneyManagement();
-				// logger.logPurchase(i,
-				// balance.convertCentsToDollars(balance.getCurrentBalanceInCents()));
 			}
 		} catch (NullPointerException nfe) {
 			System.out.println("Please enter valid item.");
@@ -57,17 +51,7 @@ public class Inventory {
 		return result;
 	}
 
-	public void dispenseItem(Item product) {
-
-		// Removes 1 item from inventory
-		int newQuantity = product.getQuantity() - 1;
-		product.setQuantity(newQuantity);
-
-		// Displays Dispense Message
-		System.out.println(
-				"\nDispensing: " + product.getItemName() + ", $" + product.getPrice() + "\n" + product.sound() + "\n");
-
-	}
+	
 
 	public Item getItemBySlot(String slotId) {
 

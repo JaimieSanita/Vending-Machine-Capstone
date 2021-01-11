@@ -31,7 +31,7 @@ public class CandyTest {
 		
 		String expectedId = "c3";
 		
-		Candy candy = new Candy("", expectedId , null, "");
+		Candy candy = new Candy(expectedId,""  , null, "");
 		
 		
 		
@@ -46,7 +46,7 @@ public class CandyTest {
 	public void candy_get_name_works() {
 		String expectedName = "cola";
 		
-		Candy candy = new Candy("", "", null, expectedName);
+		Candy candy = new Candy("", expectedName, null, "");
 		
 		String actualName = candy.getItemName();
 		
@@ -59,7 +59,7 @@ public class CandyTest {
 	public void candy_get_type_works() {
 		String expectedType = "Beverages";
 		
-		Candy candy = new Candy(expectedType, "", null, "");
+		Candy candy = new Candy( "","", null, expectedType);
 		
 		String actualType = candy.getType();
 		

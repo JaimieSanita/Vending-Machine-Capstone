@@ -33,20 +33,48 @@ public class MoneyManagement {
 		BigDecimal amountInDollars = BigDecimal.valueOf(amountInCents).movePointLeft(2);
 		return amountInDollars;
 	}
-
-	public int getRemainingBalaceInCents(Item product) {
+	
+	public int getRemainingBalanceInCents(Item product) {
+		
 		
 		//converts price into cents
 		int price = product.getPrice().movePointRight(2).intValueExact();
-		currentBalanceInCents -= price;
 		
-		Logger logger = new Logger();
-		logger.logPurchase(product, convertCentsToDollars(currentBalanceInCents));
-
+		if(currentBalanceInCents - price >= 0) {
+			
+			currentBalanceInCents -= price;	
+			Logger logger = new Logger();
+			logger.logPurchase(product, convertCentsToDollars(currentBalanceInCents));
+		}
+		
+		
+		
+		
 		return currentBalanceInCents;
 		
 
 	}
+	
+	
+public void dispenseItem(Item product) {
+	
+	int price = product.getPrice().movePointRight(2).intValueExact();
+	
+	if(currentBalanceInCents - price >= 0) {
+	
+		int newQuantity = product.getQuantity() - 1;
+		product.setQuantity(newQuantity);
+
+		// Displays Dispense Message
+		System.out.println(
+				"\nDispensing: " + product.getItemName() + ", $" + product.getPrice() + "\n" + product.sound() + "\n");
+		}
+		else {
+			System.out.println("\nSorry you dont have enough money to buy " + product.getItemName() + 
+					"\n" + "Please feed more money, and try again.\n");
+		}
+	}
+
 	
 
 	public int feedMoney(Scanner input) {
@@ -81,7 +109,7 @@ public class MoneyManagement {
 		int[] change = {currentBalanceInCents/25, (currentBalanceInCents%=25)/10, (currentBalanceInCents%=10)/5};
 		System.out.println("\nChange: Quarters: " + change[0] + ". Dimes: " + change[1] + ". Nickels: " + change[2]);
 		
-		currentBalanceInCents = 0;
+		currentBalanceInCents -= currentBalanceInCents;
 		System.out.println("Available Balance: " + getFormattedBalanceInDollars());
 	
 		

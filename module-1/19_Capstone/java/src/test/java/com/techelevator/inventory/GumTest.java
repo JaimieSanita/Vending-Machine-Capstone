@@ -32,7 +32,7 @@ public class GumTest {
 		
 		String expectedId = "c3";
 		
-		Gum gum = new Gum("", expectedId , null, "");
+		Gum gum = new Gum(expectedId, "" , null, "");
 		
 		
 		
@@ -47,7 +47,7 @@ public class GumTest {
 	public void gum_get_name_works() {
 		String expectedName = "cola";
 		
-		Gum gum = new Gum("", "", null, expectedName);
+		Gum gum = new Gum("", expectedName, null, "");
 		
 		String actualName = gum.getItemName();
 		
@@ -60,7 +60,7 @@ public class GumTest {
 	public void gum_get_type_works() {
 		String expectedType = "Gum";
 		
-		Gum gum = new Gum(expectedType, "", null, "");
+		Gum gum = new Gum("", "", null, expectedType);
 		
 		String actualType = gum.getType();
 		

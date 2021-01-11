@@ -70,8 +70,8 @@ public class VendingMachineCLI {
 						
 						//If we get an Item from the method on line 69, the code below executes, if not it loops back to purchase menu
 						while(productSelection != null) {
-						inventory.dispenseItem(productSelection);
-						balance.getRemainingBalaceInCents(productSelection);
+						balance.dispenseItem(productSelection);
+						balance.getRemainingBalanceInCents(productSelection);
 						break; 
 						}
 
