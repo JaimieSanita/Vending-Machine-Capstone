@@ -61,7 +61,9 @@ public class MoneyManagementTest {
 		 int expectedRemainingBalanceInCents = 1400;
 		 int actualRemainingBalance = balance.getRemainingBalanceInCents(item);
 		
-		Assert.assertEquals(expectedRemainingBalanceInCents, actualRemainingBalance);
+		Assert.assertEquals(
+				expectedRemainingBalanceInCents, 
+				actualRemainingBalance);
 	}
 	
 	@Test //if balance is less than price, return balance
@@ -72,15 +74,19 @@ public class MoneyManagementTest {
 		 int expectedRemainingBalanceInCents = 500;
 		 int actualRemainingBalance = balance.getRemainingBalanceInCents(item);
 		
-		Assert.assertEquals(expectedRemainingBalanceInCents, actualRemainingBalance);
+		Assert.assertEquals("If the remaining balance is less than item price, price is not subtracted.",
+				expectedRemainingBalanceInCents, 
+				actualRemainingBalance);
 	}
 	
 	@Test
 	public void feed_money_works() {
 		MoneyManagement balance = new MoneyManagement();
-		
+		int expectedBalance = 5;
 		int actualBalance = balance.feedMoney(new Scanner ("5\n"));
-		Assert.assertEquals(5, actualBalance);
+		Assert.assertEquals("Money fed into the vending machine should be stored.",
+				expectedBalance, 
+				actualBalance);
 	}
 	
 	
