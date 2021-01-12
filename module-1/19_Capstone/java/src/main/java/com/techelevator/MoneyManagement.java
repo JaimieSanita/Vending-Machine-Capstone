@@ -9,7 +9,7 @@ import com.techelevator.*;
 public class MoneyManagement {
 
 	private int currentBalanceInCents;
-	private int amountToFeed;
+	
 
 	public void addDollarsToBalance(int dollars) {
 
