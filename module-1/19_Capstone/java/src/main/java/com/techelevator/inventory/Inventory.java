@@ -17,7 +17,7 @@ public class Inventory {
 	}
 
 	// I simplified the sold out code
-	private boolean isItemSoldOut(Item product) {
+	protected boolean isItemSoldOut(Item product) {
 		return product.getQuantity() < 1;
 
 	}
