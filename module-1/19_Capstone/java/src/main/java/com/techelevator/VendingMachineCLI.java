@@ -12,7 +12,6 @@ import com.techelevator.inventory.*;
 
 public class VendingMachineCLI {
 
-	// CONSTANT VARIABLES
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_OPTION_EXIT = "Exit";
@@ -27,7 +26,7 @@ public class VendingMachineCLI {
 
 	
 
-	// VARIABLES
+	
 	private Menu menu;
 	private Menu purchaseMenu;
 	private Scanner userInput = new Scanner(System.in);
@@ -37,12 +36,12 @@ public class VendingMachineCLI {
 	private Inventory inventory = loader.loadInventory();
 	private MoneyManagement balance = new MoneyManagement();
 
-	// CONSTRUCTOR
+
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
 	}
 
-	// create a loop for purchase menu
+	
 	public void run() {
 
 		while (true) {
@@ -67,8 +66,7 @@ public class VendingMachineCLI {
 
 						inventory.displayInventory();
 						Item productSelection = inventory.selectProduct(userInput);
-						
-						//If we get an Item from the method on line 69, the code below executes, if not it loops back to purchase menu
+
 						while(productSelection != null) {
 						balance.dispenseItem(productSelection);
 						balance.getRemainingBalanceInCents(productSelection);
@@ -77,7 +75,7 @@ public class VendingMachineCLI {
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTIONS)) {
 						
-						// finishTransaction();
+		
 						balance.getChange();
 						break;
 
@@ -93,7 +91,7 @@ public class VendingMachineCLI {
 		}
 	}
 
-	// ENTRY POINT MAIN
+
 	public static void main(String[] args) {
 
 		Menu menu = new Menu(System.in, System.out);

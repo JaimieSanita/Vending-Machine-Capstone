@@ -15,28 +15,23 @@ import java.io.File;
 
 public class Menu {
 
-	// VARIABLES
 	private PrintWriter out;
 	private Scanner in;
 
-	// CONSTRUCTOR
 	public Menu(InputStream input, OutputStream output) {
-		this.out = new PrintWriter(output); // instantiating PrintWriter
-		this.in = new Scanner(input); // instantiating Scanner
+		this.out = new PrintWriter(output);
+		this.in = new Scanner(input);
 	}
 
-	// METHODS
-	// METHOD for showing choice through display options
 	public Object getChoiceFromOptions(Object[] options) {
 		Object choice = null;
 		while (choice == null) {
-			displayMenuOptions(options); // displays menu options to user
-			choice = getChoiceFromUserInput(options); // allows user to select a choice from displayed menu
+			displayMenuOptions(options);
+			choice = getChoiceFromUserInput(options);
 		}
-		return choice; // choice is set to userInput of choice
+		return choice;
 	}
 
-	// METHOD for getting user input for choice
 	private Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
 		String userInput = in.nextLine();
@@ -46,8 +41,7 @@ public class Menu {
 				choice = options[selectedOption - 1];
 			}
 		} catch (NumberFormatException e) {
-			// eat the exception, an error message will be displayed below since choice will
-			// be null
+
 		}
 		if (choice == null) {
 			out.println("\n*** " + userInput + " is not a valid option ***\n");
@@ -55,7 +49,6 @@ public class Menu {
 		return choice;
 	}
 
-	// MAIN MENU
 	private void displayMenuOptions(Object[] options) {
 		out.println();
 		for (int i = 0; i < options.length; i++) {

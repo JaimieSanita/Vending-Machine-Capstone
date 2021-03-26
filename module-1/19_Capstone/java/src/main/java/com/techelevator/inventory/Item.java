@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 
 public abstract class Item {
 
-	// VARIABLES (these variables will be different than the variables derived from
-	// file)
-
 	protected String type;
 	protected String slotID;
 	protected BigDecimal price;
@@ -15,9 +12,6 @@ public abstract class Item {
 
 	private static final int DEFAULT_QUANTITY = 5;
 
-	// DO WE NEED AN ABSTRACT METHOD TO BE OVERRIDDEN IN CATEGORY SUBCLASSES
-
-	// CONSTRUCTOR
 	public Item(String slotID, String itemName, BigDecimal price, String type) {
 		this.type = type;
 		this.slotID = slotID;
@@ -25,8 +19,6 @@ public abstract class Item {
 		this.itemName = itemName;
 		this.quantity = DEFAULT_QUANTITY;
 	}
-
-	// GETTERS
 
 	public String getSlotId() {
 		return slotID;
@@ -47,11 +39,10 @@ public abstract class Item {
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
 
 	public String toString() {
 

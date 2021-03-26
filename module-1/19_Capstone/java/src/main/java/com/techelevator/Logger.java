@@ -11,7 +11,7 @@ import com.techelevator.inventory.*;
 
 public class Logger {
 
-	// good to go
+
 	public void logFeed(BigDecimal currentBalance, BigDecimal amountFed) {
 
 		BigDecimal endingBalanceInDollars = currentBalance.add(amountFed);
@@ -20,7 +20,7 @@ public class Logger {
 
 		printToLogFile(logPrint);
 	}
-	// Current available first followed by remaining funds
+
 
 	public void logPurchase(Item product, BigDecimal endingBalance) {
 

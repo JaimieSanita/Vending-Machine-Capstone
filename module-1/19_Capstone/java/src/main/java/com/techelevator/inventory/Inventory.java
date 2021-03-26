@@ -16,20 +16,15 @@ public class Inventory {
 		this.freshInventoryList = items;
 	}
 
-	// I simplified the sold out code
 	protected boolean isItemSoldOut(Item product) {
 		return product.getQuantity() < 1;
 
 	}
 
-	// I moved selectProduct() from the main application to clean up that page a
-	// little bit
-
 	public Item selectProduct(Scanner input) {
 
 		Item result = null;
-		String productSelection = null; // slotId
-
+		String productSelection = null;
 		System.out.println("Please select item by entering slot ID>>>");
 		try {
 			productSelection = input.nextLine();
@@ -51,19 +46,16 @@ public class Inventory {
 		return result;
 	}
 
-	
-
 	public Item getItemBySlot(String slotId) {
 
 		for (Item item : this.freshInventoryList) {
-			if (item.getSlotId().equalsIgnoreCase(slotId)) {// if these match
-				return item; // returning item
+			if (item.getSlotId().equalsIgnoreCase(slotId)) {
+				return item;
 			}
 		}
-		return null; // how return as an Item because slotID is a string
+		return null;
 	}
 
-	// displays up-to-date inventory list
 	public void displayInventory() {
 		System.out.println("\n");
 
